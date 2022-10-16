@@ -1,0 +1,36 @@
+inherit_from: .rubocop_todo.yml
+
+# private/protected は一段深くインデントする
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+# 自動生成されるものはチェック対象から除外する
+AllCops:
+  Exclude:
+    - "vendor/**/*" # rubocop config/default.yml
+    - "bin/**/*"
+    - "db/**/*"
+    - "spec/**/*"
+    - "test/**/*"
+    - "config/**/*"
+  DisplayCopNames: true
+
+Style/Documentation:
+  Enabled: false
+
+ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/GlobalStdStream:
+  Exclude:
+    - "config/environments/production.rb"
+
+Style/RedundantFetchBlock:
+  Exclude:
+    - "config/puma.rb"
+
+Layout/LineLength:
+  Max: 198
