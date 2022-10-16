@@ -30,11 +30,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_16_101206) do
     t.integer "city_code", default: 0, null: false
     t.string "city_name", default: "", null: false
     t.string "thumbnail_url", default: "", null: false
+    t.integer "year", null: false
+    t.integer "season", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["public_uid"], name: "index_animes_on_public_uid", unique: true
+    t.index ["thumbnail_url"], name: "index_animes_on_thumbnail_url"
     t.index ["title"], name: "index_animes_on_title", unique: true
     t.index ["title_en"], name: "index_animes_on_title_en", unique: true
+    t.index ["year", "season"], name: "index_animes_on_year_and_season"
   end
 
 end

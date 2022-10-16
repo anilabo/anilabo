@@ -16,11 +16,15 @@ class CreateAnimes < ActiveRecord::Migration[7.0]
       t.integer :city_code, null: false, default: 0
       t.string :city_name, null: false, default: ""
       t.string :thumbnail_url, null: false, default: ""
+      t.integer :year, null: false
+      t.integer :season, null: false
 
       t.timestamps
     end
     add_index :animes, :public_uid, unique: true
     add_index :animes, :title, unique: true
     add_index :animes, :title_en, unique: true
+    add_index :animes, :thumbnail_url
+    add_index :animes, [:year, :season]
   end
 end

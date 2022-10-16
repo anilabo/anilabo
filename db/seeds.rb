@@ -12,6 +12,8 @@ spy_family = {
   sequel: 2,
   city_code: 0,
   city_name: "",
+  year: 2022,
+  season: 4 # 秋
   # product_companies: "WIT STUDIO×CloverWorks"
 }
 
