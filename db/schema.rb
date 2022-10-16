@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_16_101206) do
   enable_extension "plpgsql"
 
   create_table "animes", force: :cascade do |t|
-    t.string "public_uid", default: "", null: false
+    t.string "public_uid", null: false
     t.string "title", default: "", null: false
     t.string "title_short1", default: ""
     t.string "title_short2", default: ""

@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+spy_family = {
+  title: "SPY×FAMILY 第2クール",
+  title_short1: "SPY×FAMILY",
+  title_short2: "",
+  title_short3: "",
+  title_en: "",
+  public_url: "https://spy-family.net/",
+  twitter_account: "spyfamily_anime",
+  twitter_hash_tag: "スパイファミリー",
+  cours_id: 0,
+  sex: 0,
+  sequel: 2,
+  city_code: 0,
+  city_name: "",
+  # product_companies: "WIT STUDIO×CloverWorks"
+}
+
+anime = Anime.new(spy_family)
+anime.save!

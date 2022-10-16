@@ -1,7 +1,7 @@
 class CreateAnimes < ActiveRecord::Migration[7.0]
   def change
     create_table :animes do |t|
-      t.string :public_uid, null: false, default: ""
+      t.string :public_uid, null: false
       t.string :title, null: false, default: ""
       t.string :title_short1, default: ""
       t.string :title_short2, default: ""
