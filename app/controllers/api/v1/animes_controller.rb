@@ -13,6 +13,6 @@ class Api::V1::AnimesController < ApplicationController
   private
 
     def set_anime
-      @anime = Anime.find_by(params[:public_uid])
+      @anime = Anime.find_by(public_uid: params[:public_uid])
     end
 end
