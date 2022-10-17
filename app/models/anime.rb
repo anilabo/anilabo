@@ -3,4 +3,7 @@ class Anime < ApplicationRecord
 
   enum sex: { "men": 0, "women": 1, "custom": 2 }
   enum season: { "winter": 1, "spring": 2, "summber": 3, "fall": 4 }
+
+  has_many :anime_companies
+  has_many :companies, through: :anime_companies
 end
