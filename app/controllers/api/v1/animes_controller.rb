@@ -2,7 +2,8 @@ class Api::V1::AnimesController < ApplicationController
   before_action :set_anime, only: %i[show]
 
   def index
-    animes = Anime.all
+    @q = Anime.ransack(params[:q])
+    animes = @q.result(distinct: true)
     render json: animes
   end
 
