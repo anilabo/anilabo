@@ -23,7 +23,10 @@ class CreateAnimes < ActiveRecord::Migration[7.0]
     end
     add_index :animes, :public_uid, unique: true
     add_index :animes, :title, unique: true
-    add_index :animes, :title_en, unique: true
+    add_index :animes, :title_en
+    add_index :animes, :title_short1
+    add_index :animes, :title_short2
+    # add_index :animes, :title_short3 # title_short3はあまり使わない
     add_index :animes, :thumbnail_url
     add_index :animes, [:year, :season]
   end

@@ -37,7 +37,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_16_134945) do
     t.index ["public_uid"], name: "index_animes_on_public_uid", unique: true
     t.index ["thumbnail_url"], name: "index_animes_on_thumbnail_url"
     t.index ["title"], name: "index_animes_on_title", unique: true
-    t.index ["title_en"], name: "index_animes_on_title_en", unique: true
+    t.index ["title_en"], name: "index_animes_on_title_en"
+    t.index ["title_short1"], name: "index_animes_on_title_short1"
+    t.index ["title_short2"], name: "index_animes_on_title_short2"
     t.index ["year", "season"], name: "index_animes_on_year_and_season"
   end
 
