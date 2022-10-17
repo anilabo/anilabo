@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_16_134945) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_17_052206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_16_134945) do
     t.index ["title_short1"], name: "index_animes_on_title_short1"
     t.index ["title_short2"], name: "index_animes_on_title_short2"
     t.index ["year", "season"], name: "index_animes_on_year_and_season"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "public_uid", null: false
+    t.string "name", null: false
+    t.string "public_url", default: ""
+    t.string "address", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_companies_on_name"
+    t.index ["public_uid"], name: "index_companies_on_public_uid", unique: true
   end
 
   create_table "users", force: :cascade do |t|
