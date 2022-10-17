@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: anilabo_production
-  username: anilabo
-  password: <%= ENV["ANILABO_DATABASE_PASSWORD"] %>
+  # database: anilabo_production
+  # username: anilabo
+  # password: <%= ENV["ANILABO_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
