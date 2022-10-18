@@ -16,9 +16,10 @@ RSpec.describe "Api::V1::Animes", type: :request do
       expect(response).to have_http_status(200)
     end
 
-    it "該当のアニメ情報を返すこと" do
+    it "該当のアニメのタイトルが含まれること" do
       get api_v1_anime_path(public_uid: anime.public_uid)
-      expect(response.body.include?('SPY×FAMILY')).to eq(true)
+      json = JSON.parse(response.body)
+      expect(json["title"]).to eq("SPY×FAMILY")
     end
   end
 end
