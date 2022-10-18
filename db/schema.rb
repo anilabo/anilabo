@@ -15,8 +15,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_153431) do
   enable_extension "plpgsql"
 
   create_table "anime_companies", force: :cascade do |t|
-    t.bigint "anime_id", null: false
     t.bigint "company_id", null: false
+    t.bigint "anime_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["anime_id"], name: "index_anime_companies_on_anime_id"
@@ -55,11 +55,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_153431) do
   create_table "companies", force: :cascade do |t|
     t.string "public_uid", null: false
     t.string "name", null: false
+    t.string "name_en"
     t.string "public_url", default: ""
     t.string "address", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_companies_on_name"
+    t.index ["name_en"], name: "index_companies_on_name_en"
     t.index ["public_uid"], name: "index_companies_on_public_uid", unique: true
   end
 
