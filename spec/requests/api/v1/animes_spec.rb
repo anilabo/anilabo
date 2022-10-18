@@ -10,7 +10,7 @@ RSpec.describe "Api::V1::Animes", type: :request do
     end
   end
 
-  describe "GET /api/v1/:public_url" do
+  describe "GET /api/v1/animes/:public_uid" do
     it "ステータス200を返すこと" do
       get api_v1_anime_path(public_uid: anime.public_uid)
       expect(response).to have_http_status(200)
