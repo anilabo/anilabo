@@ -13,6 +13,7 @@ class AnimeSerializer < ActiveModel::Serializer
     twitter_hash_tag
     created_at
     updated_at
+    series
     companies
   ]
 end
