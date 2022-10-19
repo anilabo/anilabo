@@ -3,7 +3,7 @@ class Api::V1::AnimesController < ApplicationController
 
   def index
     @q = Anime.ransack(params[:q])
-    animes = @q.result(distinct: true).eager_load(:anime_companies, :companies)
+    animes = @q.result(distinct: true)
     render json: animes
   end
 
