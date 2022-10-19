@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :anime do
-    public_uid { "22e03d27" }
-    title { "SPY×FAMILY 第2クール" }
+    title { "SPY×FAMILY" }
     title_short1 { "SPY×FAMILY" }
     title_short2 { "" }
     title_short3 { "" }

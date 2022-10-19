@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_16_134945) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_17_153431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "anime_companies", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "anime_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anime_id"], name: "index_anime_companies_on_anime_id"
+    t.index ["company_id"], name: "index_anime_companies_on_company_id"
+  end
 
   create_table "animes", force: :cascade do |t|
     t.string "public_uid", null: false
@@ -43,6 +52,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_16_134945) do
     t.index ["year", "season"], name: "index_animes_on_year_and_season"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "public_uid", null: false
+    t.string "name", null: false
+    t.string "name_en"
+    t.string "public_url", default: ""
+    t.string "address", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_companies_on_name"
+    t.index ["name_en"], name: "index_companies_on_name_en"
+    t.index ["public_uid"], name: "index_companies_on_public_uid", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,4 +78,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_16_134945) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "anime_companies", "animes"
+  add_foreign_key "anime_companies", "companies"
 end
