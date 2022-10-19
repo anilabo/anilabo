@@ -8,7 +8,7 @@ class Api::V1::CompaniesController < ApplicationController
   end
 
   def show
-    render json: @company
+    render json: @company, serializer: CompanyDetailSerializer
   end
 
   private
