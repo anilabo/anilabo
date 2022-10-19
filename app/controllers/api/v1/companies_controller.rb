@@ -3,7 +3,7 @@ class Api::V1::CompaniesController < ApplicationController
 
   def index
     @q = Company.ransack(params[:q])
-    companies = @q.result(distinct: true)
+    companies = @q.result(distinct: true).eager_load(:animes)
     render json: companies
   end
 
