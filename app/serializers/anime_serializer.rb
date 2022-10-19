@@ -3,16 +3,11 @@ class AnimeSerializer < ActiveModel::Serializer
     id
     public_uid
     title
-    thumbnail_url
     title_en
-    title_short1
-    title_short2
-    title_short3
-    public_url
-    twitter_account
-    twitter_hash_tag
+    thumbnail_url
+    year
+    season
     created_at
     updated_at
-    companies
   ]
 end

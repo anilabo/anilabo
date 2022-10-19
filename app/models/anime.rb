@@ -6,4 +6,8 @@ class Anime < ApplicationRecord
 
   has_many :anime_companies
   has_many :companies, through: :anime_companies
+
+  def series
+    Anime.where(title_short1:).where.not(public_uid:)
+  end
 end

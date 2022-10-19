@@ -3,12 +3,12 @@ class Api::V1::CompaniesController < ApplicationController
 
   def index
     @q = Company.ransack(params[:q])
-    companies = @q.result(distinct: true).eager_load(:animes)
+    companies = @q.result(distinct: true)
     render json: companies
   end
 
   def show
-    render json: @company
+    render json: @company, serializer: CompanyDetailSerializer
   end
 
   private
