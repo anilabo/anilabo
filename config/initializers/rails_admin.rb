@@ -39,4 +39,96 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.excluded_models = ["AnimeCompany"]
+
+  config.model Anime do
+    list do
+      field :id
+      field :title
+      field :title_en
+      field :title_short1
+      field :title_short2
+      field :title_short3
+      field :year
+      field :season
+    end
+
+    show do
+      field :public_uid
+      field :title
+      field :thumbnail_url do
+        formatted_value do
+          bindings[:view].tag(:img, { src: bindings[:object].thumbnail_url } )
+        end
+      end
+      field :title_en
+      field :title_short1
+      field :title_short2
+      field :public_url do
+        pretty_value do
+          url = bindings[:object].public_url
+          bindings[:view].link_to(url, url, target: '_blank', rel: 'noopener noreferrer')
+        end
+      end
+      field :twitter_account do
+        pretty_value do
+          twitter_account = bindings[:object].twitter_account
+          bindings[:view].link_to("@#{twitter_account}", "https://twitter.com/#{twitter_account}", target: '_blank', rel: 'noopener noreferrer')
+        end
+      end
+      field :twitter_hash_tag do
+        pretty_value do
+          twitter_hash_tag = bindings[:object].twitter_hash_tag
+          bindings[:view].link_to("##{twitter_hash_tag}", "https://twitter.com/hashtag/#{twitter_hash_tag}", target: '_blank', rel: 'noopener noreferrer')
+        end
+      end
+      field :sex
+      field :sequel
+      field :city_code
+      field :city_name
+      field :year
+      field :season
+    end
+
+    edit do
+      configure :public_uid do
+        hide
+      end
+      configure :anime_companies do
+        hide
+      end
+    end
+  end
+
+  config.model Company do
+    list do
+      field :id
+      field :name
+      field :name_en
+    end
+
+    show do
+      field :public_uid
+      field :name
+      field :name_en
+      field :public_url do
+        pretty_value do
+          url = bindings[:object].public_url
+          bindings[:view].link_to(url, url, target: '_blank', rel: 'noopener noreferrer')
+        end
+      end
+      field :animes
+      field :address
+    end
+
+    edit do
+      configure :public_uid do
+        hide
+      end
+      configure :anime_companies do
+        hide
+      end
+    end
+  end
 end
