@@ -2,7 +2,8 @@ class Api::V1::CompaniesController < ApplicationController
   before_action :set_company, only: %i[show]
 
   def index
-    companies = Company.all
+    @q = Company.ransack(params[:q])
+    companies = @q.result(distinct: true)
     render json: companies
   end
 
