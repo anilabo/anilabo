@@ -14,6 +14,8 @@ AllCops:
     - "test/**/*"
     - "config/**/*"
   DisplayCopNames: true
+  NewCops: enable
+  SuggestExtensions: false
 
 Style/Documentation:
   Enabled: false
