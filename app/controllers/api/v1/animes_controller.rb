@@ -15,5 +15,6 @@ class Api::V1::AnimesController < ApplicationController
 
     def set_anime
       @anime = Anime.find_by(public_uid: params[:public_uid])
+      response_not_found(:anime) if @anime.blank?
     end
 end
