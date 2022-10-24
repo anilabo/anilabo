@@ -34,5 +34,16 @@ module Anilabo
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.default_locale = :ja
+
+    # configure about cors.
+    config.middleware.insert_before 0, Rack::Cors do
+      # 制限するかどうか考える
+      allow do
+        origins "*"
+        resource "*",
+          headers: :any,
+          methods: [:get, :post, :options, :head]
+      end
+    end
   end
 end
