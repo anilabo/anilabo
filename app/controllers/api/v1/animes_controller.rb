@@ -3,7 +3,7 @@ class Api::V1::AnimesController < ApplicationController
 
   def index
     @q = Anime.ransack(params[:q])
-    animes = @q.result(distinct: true)
+    animes = @q.result(distinct: true).in_order
     render json: animes
   end
 
