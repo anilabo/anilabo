@@ -4,6 +4,7 @@ class AnimeDetailSerializer < ActiveModel::Serializer
     public_uid
     title
     thumbnail_url
+    thumbnail_url_from
     title_en
     title_short1
     title_short2

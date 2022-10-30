@@ -12,4 +12,12 @@ class Anime < ApplicationRecord
   def series
     Anime.where(title_short1:).where.not(public_uid:)
   end
+
+  def thumbnail_url_from
+    if thumbnail_url.start_with?('https://m.media-amazon.com/images/')
+      'Amazon prime video'
+    elsif thumbnail_url == ''
+      'Unknown'
+    end
+  end
 end
