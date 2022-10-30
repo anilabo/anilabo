@@ -5,6 +5,7 @@ class AnimeSerializer < ActiveModel::Serializer
     title
     title_en
     thumbnail_url
+    thumbnail_url_from
     year
     season
     created_at
