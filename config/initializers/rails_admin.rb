@@ -89,6 +89,7 @@ RailsAdmin.config do |config|
       field :city_name
       field :year
       field :season
+      field :companies
     end
 
     edit do
