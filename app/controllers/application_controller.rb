@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Firebase::Auth::Authenticable
+
   # 400 Bad Request
   def response_bad_request
     render status: 400, json: { status: 400, message: 'Bad Request' }
