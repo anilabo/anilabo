@@ -7,6 +7,8 @@ gem 'active_model_serializers'
 gem 'bootsnap', require: false
 gem 'cancancan'
 gem 'devise'
+gem 'dotenv-rails'
+gem 'firebase-auth-rails'
 gem 'jbuilder'
 gem 'jsbundling-rails'
 gem 'pg', '~> 1.1'

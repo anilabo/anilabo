@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :animes, param: :public_uid
       resources :companies, param: :public_uid
+      resources :users, param: :uid
     end
   end
 end
