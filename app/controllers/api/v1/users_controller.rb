@@ -4,6 +4,7 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     raise ArgumentError, 'BadRequest Parameter' if payload.blank?
+    return if User.find_by(uid: payload['sub'])
 
     user = User.create!(sign_up_params.merge(
                           uid: payload['sub'],
