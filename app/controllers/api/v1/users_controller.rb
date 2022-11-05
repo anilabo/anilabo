@@ -9,9 +9,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.create!(sign_up_params.merge(
                           uid: payload['sub'],
                           display_name: payload['name'],
-                          photo_url: payload['picture'],
-                          password: 'hogehoge',
-                          password_confirmation: 'hogehoge'
+                          photo_url: payload['picture']
                         ))
     render json: user, status: :ok
   end
