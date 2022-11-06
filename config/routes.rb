@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :api do
     namespace :v1 do
-      resources :animes, param: :public_uid
-      resources :companies, param: :public_uid
-      resources :users, param: :uid do
-        resource :watch_log
+      resources :animes, param: :public_uid do
+        resource :watch_logs
       end
+      resources :companies, param: :public_uid
+      resources :users, param: :uid
     end
   end
 end
