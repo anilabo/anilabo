@@ -21,5 +21,8 @@ class AnimeDetailSerializer < ActiveModel::Serializer
     updated_at
     series
     companies
+    watched_users
+    watching_users
+    will_watch_users
   ]
 end

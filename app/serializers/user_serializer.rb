@@ -7,5 +7,8 @@ class UserSerializer < ActiveModel::Serializer
     photo_url
     created_at
     updated_at
+    watched_animes
+    watching_animes
+    will_watch_animes
   ]
 end
