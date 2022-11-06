@@ -7,6 +7,9 @@ class Anime < ApplicationRecord
   has_many :anime_companies
   has_many :companies, through: :anime_companies
 
+  has_many :user_animes
+  has_many :users, through: :user_animes
+
   scope :in_order, -> { order(:year, :season) }
 
   def series
