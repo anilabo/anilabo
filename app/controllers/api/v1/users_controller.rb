@@ -18,4 +18,10 @@ class Api::V1::UsersController < ApplicationController
                         ))
     render json: user, status: :ok
   end
+
+  private
+
+    def sign_up_params
+      params.require(:user).permit(:email)
+    end
 end

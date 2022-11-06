@@ -26,10 +26,6 @@ class ApplicationController < ActionController::Base
     render status: 500, json: { status: 500, message: 'Internal Server Error' }
   end
 
-  def sign_up_params
-    params.require(:user).permit(:email)
-  end
-
   def token_from_request_headers
     request.headers['Authorization']&.split&.last
   end
@@ -43,6 +39,12 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in_user
+    return if payload.nil?
+
     @logged_in_user ||= User.find_by(uid: payload['sub'])
+  end
+
+  def logged_in_user!
+    raise 'Authenticated Error' if logged_in_user.nil?
   end
 end
