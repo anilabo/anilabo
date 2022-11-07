@@ -3,10 +3,9 @@ class Api::V1::WatchLogsController < ApplicationController
   before_action :set_anime
 
   def create
-    watch_log = logged_in_user.user_animes.new(watch_log_params)
-    watch_log.anime_id = @anime.id
+    watch_log = logged_in_user.user_animes.find_or_initialize_by(anime_id: @anime.id)
 
-    if watch_log.save!
+    if watch_log.update(watch_log_params)
       render json: logged_in_user, status: :ok
     else
       render json: watch_log.errors.full_messages # ここ動くか確認する。
