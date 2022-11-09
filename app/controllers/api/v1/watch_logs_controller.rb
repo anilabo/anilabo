@@ -6,7 +6,7 @@ class Api::V1::WatchLogsController < ApplicationController
     watch_log = logged_in_user.user_animes.find_or_initialize_by(anime_id: @anime.id)
 
     if watch_log.update(watch_log_params)
-      render json: logged_in_user, status: :ok
+      render json: @anime, serializer: AnimeDetailSerializer, status: :ok
     else
       render json: watch_log.errors.full_messages # ここ動くか確認する。
     end
