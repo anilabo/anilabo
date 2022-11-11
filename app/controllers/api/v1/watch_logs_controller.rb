@@ -12,6 +12,16 @@ class Api::V1::WatchLogsController < ApplicationController
     end
   end
 
+  def destroy
+    watch_log = logged_in_user.user_animes.find_by!(anime_id: @anime.id)
+
+    if watch_log.destroy
+      render json: @anime, serializer: AnimeDetailSerializer, status: :ok
+    else
+      render json: watch_log.errors.full_messages
+    end
+  end
+
   private
 
     def set_anime
