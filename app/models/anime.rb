@@ -7,6 +7,9 @@ class Anime < ApplicationRecord
   has_many :anime_companies
   has_many :companies, through: :anime_companies
 
+  has_many :user_animes
+  has_many :users, through: :user_animes
+
   scope :in_order, -> { order(:year, :season) }
 
   def series
@@ -19,5 +22,17 @@ class Anime < ApplicationRecord
     elsif thumbnail_url == ''
       'Unknown'
     end
+  end
+
+  def watched_users
+    users.where(user_animes: { progress: 'watched' }).includes(:user_animes).select('*')
+  end
+
+  def watching_users
+    users.where(user_animes: { progress: 'watching' })
+  end
+
+  def will_watch_users
+    users.where(user_animes: { progress: 'will_watch' })
   end
 end
