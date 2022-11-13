@@ -9,4 +9,17 @@ class UserAnime < ApplicationRecord
     validates :opinion,        presence: true
     validates :finished_at,    presence: true
   end
+
+  with_options unless: :watched? do
+    after_validation :delete_opinion
+    after_validation :delete_finished_at
+  end
+
+  def delete_opinion
+    self.opinion = nil
+  end
+
+  def delete_finished_at
+    self.finished_at = nil
+  end
 end
