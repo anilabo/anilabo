@@ -3,6 +3,8 @@ class UserAnime < ApplicationRecord
   belongs_to :user
   belongs_to :anime
 
+  validates :progress, presence: true
+
   with_options if: :watched? do
     validates :opinion,        presence: true
     validates :finished_at,    presence: true

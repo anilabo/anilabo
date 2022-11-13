@@ -39,9 +39,13 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in_user
-    return if payload.nil?
+    if Rails.env.test?
+      @logged_in_user ||= User.first
+    else
+      return if payload.nil?
 
-    @logged_in_user ||= User.find_by(uid: payload['sub'])
+      @logged_in_user ||= User.find_by(uid: payload['sub'])
+    end
   end
 
   def logged_in_user!

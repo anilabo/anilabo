@@ -25,7 +25,7 @@ class Api::V1::WatchLogsController < ApplicationController
   private
 
     def set_anime
-      @anime = Anime.find_by(public_uid: params[:anime_public_uid])
+      @anime = Anime.find_by!(public_uid: params[:anime_public_uid])
     end
 
     def watch_log_params
