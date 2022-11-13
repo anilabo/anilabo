@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
+  before_action :set_firebase_token
 
   # 400 Bad Request
   def response_bad_request
@@ -51,4 +52,10 @@ class ApplicationController < ActionController::Base
   def logged_in_user!
     raise 'Authenticated Error' if logged_in_user.nil?
   end
+
+  private
+
+    def set_firebase_token
+      FirebaseIdToken::Certificates.request unless FirebaseIdToken::Certificates.present?
+    end
 end
