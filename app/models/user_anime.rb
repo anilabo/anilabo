@@ -3,8 +3,23 @@ class UserAnime < ApplicationRecord
   belongs_to :user
   belongs_to :anime
 
+  validates :progress, presence: true
+
   with_options if: :watched? do
     validates :opinion,        presence: true
     validates :finished_at,    presence: true
+  end
+
+  with_options unless: :watched? do
+    after_validation :delete_opinion
+    after_validation :delete_finished_at
+  end
+
+  def delete_opinion
+    self.opinion = nil
+  end
+
+  def delete_finished_at
+    self.finished_at = nil
   end
 end
