@@ -2,9 +2,10 @@ class Api::V1::UsersController < ApplicationController
   include Firebase::Auth::Authenticable
   skip_before_action :verify_authenticity_token
 
+  before_action :set_user, only: %i[show]
+
   def show
-    user = User.find_by(uid: params[:uid])
-    render json: user, status: :ok
+    render json: @user, status: :ok
   end
 
   def create
@@ -20,6 +21,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
+
+    def set_user
+      @user = User.find_by(uid: params[:uid])
+      response_not_found(:user) if @user.blank?
+    end
 
     def sign_up_params
       params.require(:user).permit(:email)
