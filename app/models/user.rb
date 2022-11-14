@@ -8,14 +8,14 @@ class User < ApplicationRecord
   has_many :animes, through: :user_animes
 
   def watched_animes
-    animes.where(user_animes: { progress: 'watched' }).includes(:user_animes).select('*')
+    animes.where(user_animes: { progress: 'watched' }).includes(:user_animes).select('*').order(finished_at: :desc)
   end
 
   def watching_animes
-    animes.where(user_animes: { progress: 'watching' })
+    animes.where(user_animes: { progress: 'watching' }).order('user_animes.created_at DESC')
   end
 
   def will_watch_animes
-    animes.where(user_animes: { progress: 'will_watch' })
+    animes.where(user_animes: { progress: 'will_watch' }).order('user_animes.created_at DESC')
   end
 end
