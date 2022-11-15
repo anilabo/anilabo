@@ -13,6 +13,7 @@ class UserAnime < ApplicationRecord
   with_options unless: :watched? do
     after_validation :delete_opinion
     after_validation :delete_finished_at
+    after_validation :reset_is_spoiler
   end
 
   def delete_opinion
@@ -21,5 +22,9 @@ class UserAnime < ApplicationRecord
 
   def delete_finished_at
     self.finished_at = nil
+  end
+
+  def reset_is_spoiler
+    self.is_spoiler = false
   end
 end

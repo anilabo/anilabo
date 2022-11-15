@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_06_034725) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_14_053019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_034725) do
     t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_spoiler", default: false
     t.index ["anime_id"], name: "index_user_animes_on_anime_id"
     t.index ["user_id"], name: "index_user_animes_on_user_id"
   end
