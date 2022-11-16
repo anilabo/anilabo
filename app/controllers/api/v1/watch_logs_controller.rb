@@ -29,6 +29,6 @@ class Api::V1::WatchLogsController < ApplicationController
     end
 
     def watch_log_params
-      params.require(:watch_log).permit(:progress, :opinion, :finished_at)
+      params.require(:watch_log).permit(:progress, :opinion, :finished_at, :is_spoiler)
     end
 end
