@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       end
       resources :companies, param: :public_uid
       resources :users, param: :uid
+      resource :relationships, only: %i[create destroy]
     end
   end
 end
