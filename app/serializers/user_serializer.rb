@@ -10,5 +10,7 @@ class UserSerializer < ActiveModel::Serializer
     watched_animes
     watching_animes
     will_watch_animes
+    followings
+    followers
   ]
 end
