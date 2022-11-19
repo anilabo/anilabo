@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def watched_animes
-    animes.where(user_animes: { progress: 'watched' }).includes(:user_animes).select('*').order(finished_at: :desc)
+    animes.where(user_animes: { progress: 'watched' }).includes(:user_animes).select('*').order('user_animes.created_at DESC')
   end
 
   def watching_animes
