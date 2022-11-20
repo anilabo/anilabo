@@ -5,6 +5,7 @@ class NotificationSerializer < ActiveModel::Serializer
     passive_user
     action
     checked
+    anime
     created_at
     updated_at
   ]

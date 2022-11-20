@@ -2,7 +2,7 @@ class Api::V1::NotificationsController < ApplicationController
   before_action :set_user
 
   def show
-    notifications = Notification.where(operative_user_id: @user.id).or(Notification.where(passive_user_id: @user.id))
+    notifications = @user.active_notifications
     render json: notifications, status: :ok
   end
 

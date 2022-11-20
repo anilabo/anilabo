@@ -10,6 +10,8 @@ class Anime < ApplicationRecord
   has_many :user_animes
   has_many :users, through: :user_animes
 
+  has_many :notifications, dependent: :destroy
+
   scope :in_order, -> { order(:year, :season) }
 
   def series
