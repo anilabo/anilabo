@@ -8,7 +8,9 @@ Rails.application.routes.draw do
         resource :watch_logs
       end
       resources :companies, param: :public_uid
-      resources :users, param: :uid
+      resources :users, param: :uid do
+        resource :notifications, only: %i[show]
+      end
       resource :relationships, only: %i[create destroy]
     end
   end
