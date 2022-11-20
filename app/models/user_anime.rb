@@ -3,7 +3,7 @@ class UserAnime < ApplicationRecord
   belongs_to :user
   belongs_to :anime
 
-  has_many :notifications, dependent: :destroy
+  has_many :notifications, foreign_key: 'watch_log_id', dependent: :destroy
 
   validates :progress, presence: true
 
@@ -18,15 +18,24 @@ class UserAnime < ApplicationRecord
     after_validation :reset_is_spoiler
   end
 
-  def delete_opinion
-    self.opinion = nil
-  end
+  after_save :create_notification
 
-  def delete_finished_at
-    self.finished_at = nil
-  end
+  private
 
-  def reset_is_spoiler
-    self.is_spoiler = false
-  end
+    def delete_opinion
+      self.opinion = nil
+    end
+
+    def delete_finished_at
+      self.finished_at = nil
+    end
+
+    def reset_is_spoiler
+      self.is_spoiler = false
+    end
+
+    def create_notification
+      action = progress == 'watched' ? 'opinion' : progress
+      Notification.create!(operative_user_id: user_id, anime_id:, watch_log_id: id, action:)
+    end
 end
