@@ -3,6 +3,8 @@ class UserAnime < ApplicationRecord
   belongs_to :user
   belongs_to :anime
 
+  has_many :notifications, dependent: :destroy
+
   validates :progress, presence: true
 
   with_options if: :watched? do

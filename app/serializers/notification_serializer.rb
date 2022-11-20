@@ -3,6 +3,7 @@ class NotificationSerializer < ActiveModel::Serializer
     id
     operative_user
     passive_user
+    watch_log
     action
     checked
     anime
