@@ -13,4 +13,6 @@ class UserSerializer < ActiveModel::Serializer
     followings
     followers
   ]
+  has_many :active_notifications
+  has_many :passive_notifications
 end
