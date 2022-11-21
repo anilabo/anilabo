@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_044739) do
     t.integer "passive_user_id"
     t.integer "anime_id"
     t.integer "watch_log_id"
-    t.string "action", default: "", null: false
+    t.integer "action", default: 0, null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

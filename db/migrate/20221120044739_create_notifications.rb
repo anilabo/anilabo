@@ -5,7 +5,7 @@ class CreateNotifications < ActiveRecord::Migration[7.0]
       t.integer :passive_user_id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
       t.integer :anime_id
       t.integer :watch_log_id
-      t.string :action, default: '', null: false
+      t.integer :action, default: 0, null: false
       t.boolean :checked, default: false, null: false
 
       t.timestamps
