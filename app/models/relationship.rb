@@ -16,7 +16,7 @@ class Relationship < ApplicationRecord
 
     def create_notification
       Notification.create!(operative_user_id: follower_id, passive_user_id: followed_id, action: 'follow')
-      Notification.create!(operative_user_id: followed_id, passive_user_id: follower_id, action: 'followed')
+      Notification.create!(operative_user_id: followed_id, passive_user_id: follower_id, action: 'followed', checked: true)
     end
 
     def delete_notification
