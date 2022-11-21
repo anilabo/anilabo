@@ -45,5 +45,7 @@ module Anilabo
           methods: [:get, :post, :options, :head, :delete]
       end
     end
+
+    config.time_zone = 'Tokyo'
   end
 end
