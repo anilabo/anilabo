@@ -20,9 +20,9 @@ class UserAnime < ApplicationRecord
 
   after_save :create_notification
 
-  scope :watched, -> { where(progress: 'watched') }
-  scope :watching, -> { where(progress: 'watching') }
-  scope :will_watch, -> { where(progress: 'will_watch') }
+  scope :watched, -> { where(progress: 'watched').order(created_at: :desc) }
+  scope :watching, -> { where(progress: 'watching').order(created_at: :desc) }
+  scope :will_watch, -> { where(progress: 'will_watch').order(created_at: :desc) }
 
   private
 

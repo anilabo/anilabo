@@ -9,10 +9,14 @@ class UserSerializer < ActiveModel::Serializer
     updated_at
     followings
     followers
+    watched_animes
   ]
-  has_many :watched_animes
   has_many :watching_animes
   has_many :will_watch_animes
   has_many :active_notifications
   has_many :passive_notifications
+
+  def watched_animes
+    object.watched_animes.select('*')
+  end
 end
