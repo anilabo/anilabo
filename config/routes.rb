@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :animes, param: :public_uid do
-        resource :watch_logs
+        resource :watch_logs, only: %i[create destroy]
       end
       resources :companies, param: :public_uid
       resources :users, param: :uid
