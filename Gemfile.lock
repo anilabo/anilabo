@@ -353,6 +353,7 @@ DEPENDENCIES
   firebase-auth-rails
   jbuilder
   jsbundling-rails
+  kaminari
   overcommit
   pg (~> 1.1)
   pry-rails
