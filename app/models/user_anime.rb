@@ -40,7 +40,7 @@ class UserAnime < ApplicationRecord
 
     def delete_notifications_when_change_from_watched_and_create_notification
       n = Notification.where(operative_user_id: user_id, anime_id:)
-      n.destroy_all if n.first.action == 'opinion'
+      n.destroy_all if n[0] && n.first.action == 'opinion'
       create_notification
     end
 
