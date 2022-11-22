@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_18_050319) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_20_044739) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_18_050319) do
     t.index ["name"], name: "index_companies_on_name"
     t.index ["name_en"], name: "index_companies_on_name_en"
     t.index ["public_uid"], name: "index_companies_on_public_uid", unique: true
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "operative_user_id", null: false
+    t.integer "passive_user_id"
+    t.integer "anime_id"
+    t.integer "watch_log_id"
+    t.integer "action", default: 0, null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anime_id"], name: "index_notifications_on_anime_id"
+    t.index ["operative_user_id"], name: "index_notifications_on_operative_user_id"
+    t.index ["passive_user_id"], name: "index_notifications_on_passive_user_id"
+    t.index ["watch_log_id"], name: "index_notifications_on_watch_log_id"
   end
 
   create_table "relationships", force: :cascade do |t|

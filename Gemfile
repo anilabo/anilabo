@@ -32,6 +32,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bullet'
   gem 'overcommit'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false

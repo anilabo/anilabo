@@ -31,7 +31,7 @@ RSpec.describe UserAnime, type: :model do
         expect(@watch_log.is_spoiler).to eq(false)
         @watch_log.update!(progress: "watched", opinion: '面白かった！', finished_at: '2022-11-14', is_spoiler: true)
         expect(@watch_log.opinion).to eq("面白かった！")
-        expect(@watch_log.finished_at).to eq('2022-11-14 00:00:00.000000000 +0000')
+        expect(@watch_log.finished_at).to eq('2022-11-14 00:00:00.000000000 +0900')
         expect(@watch_log.is_spoiler).to eq(true)
         @watch_log.update!(progress: "will_watch", opinion: '面白そう', finished_at: '2022-11-15')
         expect(@watch_log.opinion).to eq(nil)

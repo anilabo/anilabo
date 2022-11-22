@@ -7,10 +7,16 @@ class UserSerializer < ActiveModel::Serializer
     photo_url
     created_at
     updated_at
-    watched_animes
-    watching_animes
-    will_watch_animes
     followings
     followers
+    watched_animes
   ]
+  has_many :watching_animes
+  has_many :will_watch_animes
+  has_many :active_notifications
+  has_many :passive_notifications
+
+  def watched_animes
+    object.watched_animes.select('*')
+  end
 end
