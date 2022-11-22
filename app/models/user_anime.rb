@@ -18,7 +18,8 @@ class UserAnime < ApplicationRecord
     after_validation :reset_is_spoiler
   end
 
-  before_save :delete_notifications_when_change_from_watched_and_create_notification
+  before_save :delete_notifications_when_change_from_watched
+  after_save :create_notification
 
   scope :watched, -> { where(progress: 'watched').order(created_at: :desc) }
   scope :watching, -> { where(progress: 'watching').order(created_at: :desc) }
@@ -38,10 +39,9 @@ class UserAnime < ApplicationRecord
       self.is_spoiler = false
     end
 
-    def delete_notifications_when_change_from_watched_and_create_notification
+    def delete_notifications_when_change_from_watched
       n = Notification.where(operative_user_id: user_id, anime_id:)
       n.destroy_all if n[0] && n.first.action == 'opinion'
-      create_notification
     end
 
     def create_notification
