@@ -20,6 +20,10 @@ class UserAnime < ApplicationRecord
 
   after_save :create_notification
 
+  scope :watched, -> { where(progress: 'watched') }
+  scope :watching, -> { where(progress: 'watching') }
+  scope :will_watch, -> { where(progress: 'will_watch') }
+
   private
 
     def delete_opinion
