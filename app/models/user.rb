@@ -33,4 +33,8 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  def following_ids
+    followings.map(&:id)
+  end
 end

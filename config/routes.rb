@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :companies, param: :public_uid
       resources :users, param: :uid
       resource :relationships, only: %i[create destroy]
+      resource :timelines, only: %i[show]
     end
   end
 end
