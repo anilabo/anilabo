@@ -23,7 +23,10 @@ class Api::V1::UsersController < ApplicationController
   private
 
     def set_user
-      @user = User.find_by(uid: params[:uid])
+      @user = User.preload(
+        active_notifications: %i[watch_log anime operative_user passive_user],
+        passive_notifications: %i[watch_log anime operative_user passive_user]
+      ).find_by(uid: params[:uid])
       response_not_found(:user) if @user.blank?
     end
 
