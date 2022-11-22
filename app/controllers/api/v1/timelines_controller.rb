@@ -1,10 +1,10 @@
 class Api::V1::TimelinesController < ApplicationController
   include Pagenation
 
-  def show
-    user = User.find_by(email: 'hm385.chejptks@gmail.com')
+  before_action :logged_in_user!
 
-    array = user.following_ids.push(user.id)
+  def show
+    array = logged_in_user.following_ids.push(logged_in_user.id)
     notifications = Notification
                     .includes(%i[watch_log anime operative_user passive_user])
                     .where(operative_user_id: array)
