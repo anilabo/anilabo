@@ -91,14 +91,76 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # describe "メソッドに関するテスト" do
-  # end
+  describe "メソッドに関するテスト" do
+    describe "フォロー機能" do
+      context "followしたとき" do
+        it "Relationshipのレコードが1つ増えること" do
+          expect do
+            user.follow(users.sample.id)
+          end.to change { Relationship.count }.by(1)
+        end
+
+        it "followingsの数が1つ増えること" do
+          expect do
+            user.follow(users.sample.id)
+          end.to change { user.followings.count }.by(1)
+        end
+
+        it '相手のfollowersに自分が追加されること' do
+          target_user = users.sample
+          user.follow(target_user.id)
+          expect(target_user.followers).to include(user)
+        end
+
+        it 'followersの数は変化しないこと' do
+          expect do
+            user.follow(users.sample.id)
+          end.to change { user.followers.count }.by(0)
+        end
+      end
+
+      context "unfollowしたとき" do
+        before do
+          @target_user = users.sample
+          user.follow(@target_user.id)
+        end
+
+        it "Relathinshipのレコードが1つ減ること" do
+          expect do
+            user.unfollow(@target_user.id)
+          end.to change { Relationship.count }.by(-1)
+        end
+
+        it "followingsの数が一つ減ること" do
+          expect do
+            user.unfollow(@target_user.id)
+          end.to change { user.followings.count }.by(-1)
+        end
+
+        it '相手のfollowersから自分が削除されること' do
+          expect(@target_user.followers).to include(user)
+          user.unfollow(@target_user)
+          expect(@target_user.followers).not_to include(user)
+        end
+
+        it 'followersの数は変化しないこと' do
+          expect do
+            user.unfollow(@target_user)
+          end.to change { user.followers.count }.by(0)
+        end
+      end
+
+      context "following?は" do
+        it "booleanであること" do
+          expect(user.following?(@target_user)).to eq(false)
+          target_user = users.sample
+          user.follow(target_user.id)
+          expect(user.following?(target_user)).to eq(true)
+        end
+      end
+    end
+  end
 
   # describe "バリデーションに関するテスト" do
   # end
-
-  # describe "コールバックに関するテスト" do
-  # end
-
-
 end
