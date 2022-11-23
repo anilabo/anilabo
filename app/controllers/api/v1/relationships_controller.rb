@@ -1,4 +1,4 @@
-class Api::V1::RelationshipsController < ApplicationController
+class Api::V1::RelationshipsController < Api::ApplicationController
   before_action :logged_in_user!
   before_action :set_target_user
 

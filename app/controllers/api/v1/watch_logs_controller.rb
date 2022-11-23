@@ -1,4 +1,4 @@
-class Api::V1::WatchLogsController < ApplicationController
+class Api::V1::WatchLogsController < Api::ApplicationController
   before_action :authenticate_user
   before_action :set_anime
 

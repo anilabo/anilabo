@@ -1,16 +1,1 @@
-<h1>Anilabo API</h1>
-<ul>
-  <% if user_signed_in? %>
-    <li>hello, <%= current_user.email %> !</li>
-    <li><%= link_to "Go admin", rails_admin_path %></li>
-    <li>
-      <%= link_to "Logout", destroy_user_session_path, 
-        data: {
-          "turbo-method": :delete
-        }
-      %>
-    </li>
-  <% else %>
-    <li><%= link_to "login as admin", new_user_session_path %></li>
-  <% end %>
-</ul>
+<p>hello,</p>

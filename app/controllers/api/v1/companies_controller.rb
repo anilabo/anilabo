@@ -1,4 +1,4 @@
-class Api::V1::CompaniesController < ApplicationController
+class Api::V1::CompaniesController < Api::ApplicationController
   before_action :set_company, only: %i[show]
 
   def index
