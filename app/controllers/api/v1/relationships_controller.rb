@@ -3,13 +3,13 @@ class Api::V1::RelationshipsController < ApplicationController
   before_action :set_target_user
 
   def create
-    logged_in_user.follow(@target_user.id)
+    logged_in_user.follow(@target_user)
 
     render json: logged_in_user, status: :ok
   end
 
   def destroy
-    logged_in_user.unfollow(@target_user.id)
+    logged_in_user.unfollow(@target_user)
     render json: logged_in_user, status: :ok
   end
 
