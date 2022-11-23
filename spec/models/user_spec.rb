@@ -68,6 +68,27 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    describe "通知・アクティビティ機能" do
+      before do
+        10.times.each do |n|
+          Notification.create(operative_user_id: user.id, passive_user_id: users.sample.id, action: "will_watch")
+          Notification.create(operative_user_id: users.sample.id, passive_user_id: user.id, action: "watching")
+        end
+      end
+
+      context "active_notificationsは" do
+        it "operative_userが自分であること" do
+          expect(user.active_notifications.first.operative_user_id).to eq(user.id)
+        end
+      end
+
+      context "passive_notificationsは" do
+        it "passive_userが自分であること" do
+          expect(user.passive_notifications.first.passive_user_id).to eq(user.id)
+        end
+      end
+    end
   end
 
   # describe "メソッドに関するテスト" do
