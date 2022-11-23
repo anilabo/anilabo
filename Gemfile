@@ -5,8 +5,6 @@ ruby '3.1.2'
 
 gem 'active_model_serializers'
 gem 'bootsnap', require: false
-gem 'cancancan'
-gem 'devise'
 gem 'dotenv-rails'
 gem 'firebase-auth-rails'
 gem 'jbuilder'
