@@ -2,7 +2,7 @@ class Api::ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   include Firebase::Auth::Authenticable
 
-  before_action :set_firebase_token
+  before_action :set_firebase_token, unless: -> { Rails.env.test? }
 
   # 400 Bad Request
   def response_bad_request
