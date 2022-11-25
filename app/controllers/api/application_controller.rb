@@ -2,6 +2,8 @@ class Api::ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   include Firebase::Auth::Authenticable
 
+  before_action :set_firebase_token
+
   # 400 Bad Request
   def response_bad_request
     render status: 400, json: { status: 400, message: 'Bad Request' }
@@ -26,4 +28,10 @@ class Api::ApplicationController < ActionController::Base
   def response_internal_server_error
     render status: 500, json: { status: 500, message: 'Internal Server Error' }
   end
+
+  private
+
+    def set_firebase_token
+      FirebaseIdToken::Certificates.request unless FirebaseIdToken::Certificates.present?
+    end
 end

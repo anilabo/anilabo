@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   root 'home#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  scope module: :admin do
+    post '/login', to: "login#create"
+    delete '/logout', to: "login#destroy"
+  end
+
   # api
   namespace :api do
     namespace :v1 do
