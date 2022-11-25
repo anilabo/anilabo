@@ -4,14 +4,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 gem 'active_model_serializers'
+gem 'bcrypt'
 gem 'bootsnap', require: false
-gem 'cancancan'
-gem 'devise'
 gem 'dotenv-rails'
 gem 'firebase-auth-rails'
 gem 'jbuilder'
 gem 'jsbundling-rails'
 gem 'kaminari'
+gem 'nokogiri', '>= 1.13.9'
 gem 'pg', '~> 1.1'
 gem 'public_uid'
 gem 'puma', '~> 5.0'
@@ -28,6 +28,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'whenever'
 
 group :development, :test do
+  gem 'brakeman'
+  gem 'bundler-audit'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-rails'
 end

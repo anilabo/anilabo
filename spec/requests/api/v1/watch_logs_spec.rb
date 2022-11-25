@@ -4,10 +4,15 @@ RSpec.describe "Api::V1::WatchLogs", type: :request do
   let!(:user) { create(:user) }
   let!(:anime) { create(:anime) }
   describe "POST /api/v1/animes/:anime_public_uid/watch_logs" do
+    let(:headers) {{ 'Content-Type': 'application/json', Authorization: "Bearer token" }}
+
+    let!(:user) { create(:user) }
+    let!(:anime) { create(:anime) }
     let(:valid_params) {{ anime_public_uid: anime.public_uid, watch_log: { progress: "watched", opinion: "面白い", finished_at: "2022-11-13" }}}
     let(:invalid_params) {{ anime_public_uid: anime.public_uid, watch_log: { progress: nil }}}
 
-    context "logged_in_userと該当するアニメの情報がないとき" do
+    before { stub_firebase(user) }
+    context "current_userと該当するアニメの情報がないとき" do
       it 'user_animeレコードが1つ増えること' do
         expect do
           post api_v1_anime_watch_logs_path(valid_params)
@@ -20,14 +25,14 @@ RSpec.describe "Api::V1::WatchLogs", type: :request do
         expect(json["title"]).to eq("SPY×FAMILY")
       end
 
-      it 'レスポンスしたアニメの情報にlogged_in_userの名前が含まれること' do
+      it 'レスポンスしたアニメの情報にcurrent_userの名前が含まれること' do
         post api_v1_anime_watch_logs_path(valid_params)
         json = JSON.parse(response.body)
         expect(json["watched_users"][0]["display_name"]).to eq("野生のミシシッピズワイガニ")
       end
     end
 
-    context 'logged_in_userと該当するアニメのuser_animeレコードが既にあるとき' do
+    context 'current_userと該当するアニメのuser_animeレコードが既にあるとき' do
       before do
         user.user_animes.create!(anime_id: anime.id, progress: "watching")
       end
@@ -44,7 +49,7 @@ RSpec.describe "Api::V1::WatchLogs", type: :request do
         expect(json["title"]).to eq("SPY×FAMILY")
       end
 
-      it 'レスポンスしたアニメの情報にlogged_in_userの名前が含まれること' do
+      it 'レスポンスしたアニメの情報にcurrent_userの名前が含まれること' do
         post api_v1_anime_watch_logs_path(valid_params)
         json = JSON.parse(response.body)
         expect(json["watching_users"]).to eq([])
