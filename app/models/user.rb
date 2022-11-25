@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_secure_password
+  has_secure_password(validations: false)
 
   has_many :user_animes, dependent: :destroy
   has_many :animes, through: :user_animes
