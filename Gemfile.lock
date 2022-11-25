@@ -84,7 +84,6 @@ GEM
     bullet (7.0.3)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
-    cancancan (3.4.0)
     case_transform (0.2)
       activesupport
     childprocess (4.1.0)
@@ -334,7 +333,6 @@ DEPENDENCIES
   bcrypt
   bootsnap
   bullet
-  cancancan
   debug
   dotenv-rails
   factory_bot_rails
