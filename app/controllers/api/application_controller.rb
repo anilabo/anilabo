@@ -1,6 +1,8 @@
-class ApplicationController < ActionController::Base
+class Api::ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  before_action :set_firebase_token
+  include Firebase::Auth::Authenticable
+
+  before_action :set_firebase_token, unless: -> { Rails.env.test? }
 
   # 400 Bad Request
   def response_bad_request
@@ -25,32 +27,6 @@ class ApplicationController < ActionController::Base
   # 500 Internal Server Error
   def response_internal_server_error
     render status: 500, json: { status: 500, message: 'Internal Server Error' }
-  end
-
-  def token_from_request_headers
-    request.headers['Authorization']&.split&.last
-  end
-
-  def token
-    params[:token] || token_from_request_headers
-  end
-
-  def payload
-    @payload ||= FirebaseIdToken::Signature.verify token
-  end
-
-  def logged_in_user
-    if Rails.env.test?
-      @logged_in_user ||= User.first
-    else
-      return if payload.nil?
-
-      @logged_in_user ||= User.find_by(uid: payload['sub'])
-    end
-  end
-
-  def logged_in_user!
-    raise 'Authenticated Error' if logged_in_user.nil?
   end
 
   private

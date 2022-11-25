@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  # admin
   root 'home#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+
+  scope module: :admin do
+    post '/login', to: "login#create"
+    delete '/logout', to: "login#destroy"
+  end
+
+  # api
   namespace :api do
     namespace :v1 do
       resources :animes, param: :public_uid do

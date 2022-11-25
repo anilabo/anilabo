@@ -1,9 +1,9 @@
-class Api::V1::WatchLogsController < ApplicationController
-  before_action :logged_in_user!
+class Api::V1::WatchLogsController < Api::ApplicationController
+  before_action :authenticate_user
   before_action :set_anime
 
   def create
-    watch_log = logged_in_user.user_animes.find_or_initialize_by(anime_id: @anime.id)
+    watch_log = current_user.user_animes.find_or_initialize_by(anime_id: @anime.id)
 
     if watch_log.update(watch_log_params)
       render json: @anime, serializer: AnimeDetailSerializer, status: :ok
@@ -13,7 +13,7 @@ class Api::V1::WatchLogsController < ApplicationController
   end
 
   def destroy
-    watch_log = logged_in_user.user_animes.find_by!(anime_id: @anime.id)
+    watch_log = current_user.user_animes.find_by!(anime_id: @anime.id)
 
     if watch_log.destroy
       render json: @anime, serializer: AnimeDetailSerializer, status: :ok

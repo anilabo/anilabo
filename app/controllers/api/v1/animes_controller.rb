@@ -1,4 +1,4 @@
-class Api::V1::AnimesController < ApplicationController
+class Api::V1::AnimesController < Api::ApplicationController
   before_action :set_anime, only: %i[show]
 
   def index
