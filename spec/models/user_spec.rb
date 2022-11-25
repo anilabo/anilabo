@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user)    { create(:user) }
+  let!(:user)   { create(:user) }
   let(:users)   { create_list(:provisional_user, 10) }
+  let(:provisional_user) { create(:provisional_user) }
+  let(:anime)   { create(:provisional_anime) }
   let(:animes)  { create_list(:provisional_anime, 10)}
 
   
@@ -163,4 +165,50 @@ RSpec.describe User, type: :model do
 
   # describe "バリデーションに関するテスト" do
   # end
+
+  describe 'コールバックに関するテスト' do
+    before do
+      user.follow(provisional_user)
+      user.user_animes.create!(anime_id: anime.id, progress: "watching")
+    end
+
+    context 'destroy時' do
+      it 'Userのレコードが一つ減ること' do
+        expect do
+          user.destroy
+        end.to change { User.count }.by(-1)
+      end
+
+      it 'UserAnimeのレコードが一つ減ること' do
+        expect do
+          user.destroy
+        end.to change { UserAnime.count }.by(-1)
+      end
+
+      it 'Relationshipのレコードが一つ減ること' do
+        expect do
+          user.destroy
+        end.to change { Relationship.count }.by(-1)
+      end
+
+      it 'Notificationのレコードが一つ減ること' do
+        notificatio_count = user.active_notifications.count + user.passive_notifications.count
+        expect do
+          user.destroy
+        end.to change { Notification.count }.by(-notificatio_count)
+      end
+
+      it 'Animeのレコード数は変化しないこと' do
+        expect do
+          user.destroy
+        end.to change { Anime.count }.by(0)
+      end
+
+      it 'UserAnimeのレコード数が1つ減ること' do
+        expect do
+          user.destroy
+        end.to change { UserAnime.count }.by(-1)
+      end
+    end
+  end
 end
