@@ -3,15 +3,13 @@ require 'rails_helper'
 RSpec.describe "Api::V1::WatchLogs", type: :request do
   let!(:user) { create(:user) }
   let!(:anime) { create(:anime) }
+  let(:headers) {{ 'Content-Type': 'application/json', Authorization: "Bearer token" }}
+  let(:valid_params) {{ anime_public_uid: anime.public_uid, watch_log: { progress: "watched", opinion: "面白い", finished_at: "2022-11-13" }}}
+  let(:invalid_params) {{ anime_public_uid: anime.public_uid, watch_log: { progress: nil }}}
+  before { stub_firebase(user) }
+
   describe "POST /api/v1/animes/:anime_public_uid/watch_logs" do
-    let(:headers) {{ 'Content-Type': 'application/json', Authorization: "Bearer token" }}
 
-    let!(:user) { create(:user) }
-    let!(:anime) { create(:anime) }
-    let(:valid_params) {{ anime_public_uid: anime.public_uid, watch_log: { progress: "watched", opinion: "面白い", finished_at: "2022-11-13" }}}
-    let(:invalid_params) {{ anime_public_uid: anime.public_uid, watch_log: { progress: nil }}}
-
-    before { stub_firebase(user) }
     context "current_userと該当するアニメの情報がないとき" do
       it 'user_animeレコードが1つ増えること' do
         expect do
