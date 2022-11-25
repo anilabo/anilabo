@@ -1,10 +1,10 @@
-class Api::V1::TimelinesController < ApplicationController
+class Api::V1::TimelinesController < Api::ApplicationController
   include Pagenation
 
-  before_action :logged_in_user!
+  before_action :authenticate_user
 
   def show
-    array = logged_in_user.following_ids.push(logged_in_user.id)
+    array = current_user.following_ids.push(current_user.id)
     notifications = Notification
                     .includes(%i[watch_log anime operative_user passive_user])
                     .where(operative_user_id: array)
