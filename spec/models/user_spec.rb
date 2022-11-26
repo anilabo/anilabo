@@ -160,6 +160,18 @@ RSpec.describe User, type: :model do
           expect(user.following?(target_user)).to eq(true)
         end
       end
+
+      context "following_idsは" do
+        before do
+          users.each do |target_user|
+            user.follow(target_user)
+          end
+        end
+
+        it "followしているユーザーのIDの配列であること" do
+          expect(user.following_ids.sort).to eq(users.map(&:id).sort)
+        end
+      end
     end
   end
 
