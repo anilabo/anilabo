@@ -11,6 +11,9 @@ require 'rspec/rails'
 require 'simplecov'
 SimpleCov.start do
   enable_coverage :branch
+  add_filter ["/spec/", "/serializer"]
+  add_group "Models", "app/models"
+  add_group "Controllers", "app/controllers"
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
