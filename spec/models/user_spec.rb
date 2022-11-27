@@ -74,8 +74,8 @@ RSpec.describe User, type: :model do
     describe "通知・アクティビティ機能" do
       before do
         10.times.each do |n|
-          Notification.create(operative_user_id: user.id, passive_user_id: users.sample.id, action: "will_watch")
-          Notification.create(operative_user_id: users.sample.id, passive_user_id: user.id, action: "watching")
+          Notification.create(operative_user_id: user.id, passive_user_id: users.sample.id, action: "follow")
+          Notification.create(operative_user_id: users.sample.id, passive_user_id: user.id, action: "follow")
         end
       end
 
