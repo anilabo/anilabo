@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Timelines", type: :request do
+RSpec.describe "Api::v1::Timelines", type: :request do
   let!(:user) { create(:user)}
 
   describe "GET /api/v1/timelines" do
