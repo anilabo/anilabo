@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # admin
-  root 'home#index'
+  root 'admin/home#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   scope module: :admin do
