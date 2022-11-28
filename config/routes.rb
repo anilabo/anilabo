@@ -14,8 +14,8 @@ Rails.application.routes.draw do
       resources :animes, param: :public_uid do
         resource :watch_logs, only: %i[create destroy]
       end
-      resources :companies, param: :public_uid
-      resources :users, param: :uid
+      resources :companies, param: :public_uid, only: %i[index show]
+      resources :users, param: :uid, only: %i[show create]
       resource :relationships, only: %i[create destroy]
       resource :timelines, only: %i[show]
     end
