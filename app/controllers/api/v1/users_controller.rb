@@ -1,5 +1,6 @@
 class Api::V1::UsersController < Api::ApplicationController
   before_action :set_user, only: %i[show]
+  before_action :set_user_params, only: %i[create]
 
   def show
     render json: @user, status: :ok
@@ -9,13 +10,12 @@ class Api::V1::UsersController < Api::ApplicationController
     raise ArgumentError, 'BadRequest Parameter' if payload.blank?
     return if User.find_by(uid: payload['sub'])
 
-    user = User.create!(
-      uid: payload['sub'],
-      display_name: payload['name'],
-      photo_url: payload['picture'],
-      email: payload['email']
-    )
-    render json: user, status: :ok
+    if @user.save
+      UserMailer.with(user: @user).welcome_email.deliver_later
+      render json: @user, status: :ok
+    else
+      render json: @user.errors.full_messages, status: :internal_server_error
+    end
   end
 
   private
@@ -38,5 +38,14 @@ class Api::V1::UsersController < Api::ApplicationController
 
     def payload
       @payload ||= FirebaseIdToken::Signature.verify token
+    end
+
+    def set_user_params
+      @user = User.new(
+        uid: payload['sub'],
+        display_name: payload['name'],
+        photo_url: payload['picture'],
+        email: payload['email']
+      )
     end
 end
