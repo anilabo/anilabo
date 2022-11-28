@@ -21,8 +21,8 @@ class UserAnime < ApplicationRecord
   before_save :delete_notifications_when_change_from_watched
   after_save :create_notification
 
-  scope :watched, -> { where(progress: 'watched').order(created_at: :desc) }
-  scope :watching, -> { where(progress: 'watching').order(created_at: :desc) }
+  scope :watched,    -> { where(progress: 'watched').order(created_at: :desc) }
+  scope :watching,   -> { where(progress: 'watching').order(created_at: :desc) }
   scope :will_watch, -> { where(progress: 'will_watch').order(created_at: :desc) }
 
   private

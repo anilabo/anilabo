@@ -10,6 +10,7 @@ gem 'dotenv-rails'
 gem 'firebase-auth-rails'
 gem 'jbuilder'
 gem 'jsbundling-rails'
+gem 'kaminari'
 gem 'nokogiri', '>= 1.13.9'
 gem 'pg', '~> 1.1'
 gem 'public_uid'
@@ -46,5 +47,6 @@ end
 group :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'simplecov'
 end
 gem 'sassc-rails'

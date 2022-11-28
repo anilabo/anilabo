@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # admin
-  root 'home#index'
+  root 'admin/home#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   scope module: :admin do
@@ -12,11 +12,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :animes, param: :public_uid do
-        resource :watch_logs
+        resource :watch_logs, only: %i[create destroy]
       end
-      resources :companies, param: :public_uid
-      resources :users, param: :uid
+      resources :companies, param: :public_uid, only: %i[index show]
+      resources :users, param: :uid, only: %i[show create]
       resource :relationships, only: %i[create destroy]
+      resource :timelines, only: %i[show]
     end
   end
 end
