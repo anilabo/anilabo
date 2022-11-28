@@ -4,13 +4,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= @user.display_name %>様、example.comへようこそ。</h1>
+    <h1>Hi, <%= @user.display_name %>!</h1>
     <p>
-      animediaへのサインアップが成功しました。
+      Your Email address, <%= @user.email %> was subscribed with our service.
     </p>
     <p>
-      このサイトにログインするには、<%= @url %>をクリックしてください。
+      If you do not recognize this email, please ignore it.
     </p>
-    <p>本サイトにユーザー登録いただきありがとうございます。</p>
+    <p>Thank you for joining our community. Join <%= link_to 'here', ENV['ANIMEDIA_URL'] %>.</p>
+    <p>Animedia, Inc.</p>
   </body>
 </html>
