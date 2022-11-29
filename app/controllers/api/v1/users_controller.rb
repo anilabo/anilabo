@@ -1,6 +1,7 @@
 class Api::V1::UsersController < Api::ApplicationController
-  before_action :set_user, only: %i[show]
+  before_action :set_user, only: %i[show update]
   before_action :set_user_params, only: %i[create]
+  before_action :authenticate_user, only: %i[update]
 
   def show
     render json: @user, status: :ok
@@ -18,6 +19,14 @@ class Api::V1::UsersController < Api::ApplicationController
     end
   end
 
+  def update
+    if current_user.update(user_params)
+      render json: current_user, status: :ok
+    else
+      render json: current_user.errors.full_messages, status: :internal_server_error
+    end
+  end
+
   private
 
     def set_user
@@ -26,6 +35,10 @@ class Api::V1::UsersController < Api::ApplicationController
         passive_notifications: %i[watch_log anime operative_user passive_user]
       ).find_by(uid: params[:uid])
       response_not_found(:user) if @user.blank?
+    end
+
+    def user_params
+      params.require(:user).permit(:display_name)
     end
 
     def token_from_request_headers
