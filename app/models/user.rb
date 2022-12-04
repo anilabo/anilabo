@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   # バリデーション
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :display_name,    presence: true, length: { in: 5..20 }
+  validates :display_name,    presence: true, length: { in: 1..30 }
   validates :email,           presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :introduction,    length: { maximum: 200 }
 

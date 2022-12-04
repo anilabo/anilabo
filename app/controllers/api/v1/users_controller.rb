@@ -1,7 +1,7 @@
 class Api::V1::UsersController < Api::ApplicationController
   before_action :set_user, only: %i[show]
   before_action :set_user_params, only: %i[create]
-  before_action :authenticate_user, only: %i[update]
+  before_action :authenticate_user, only: %i[update destroy]
 
   def show
     render json: @user, status: :ok
@@ -9,7 +9,7 @@ class Api::V1::UsersController < Api::ApplicationController
 
   def create
     raise ArgumentError, 'BadRequest Parameter' if payload.blank?
-    return if User.find_by(uid: payload['sub'])
+    return if User.find_by(email: payload['email'])
 
     if @user.save
       UserMailer.with(user: @user).welcome_email.deliver_later
@@ -21,6 +21,15 @@ class Api::V1::UsersController < Api::ApplicationController
 
   def update
     if current_user.update(user_params)
+      # render json: current_user, status: :ok
+      render json: current_user.display_name, status: :ok
+    else
+      render json: current_user.errors.full_messages, status: :internal_server_error
+    end
+  end
+
+  def destroy
+    if current_user.destroy
       # render json: current_user, status: :ok
       render json: current_user.display_name, status: :ok
     else
