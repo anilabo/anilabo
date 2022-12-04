@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::ApplicationController
-  before_action :set_user, only: %i[show update]
+  before_action :set_user, only: %i[show]
   before_action :set_user_params, only: %i[create]
   before_action :authenticate_user, only: %i[update]
 
@@ -21,7 +21,8 @@ class Api::V1::UsersController < Api::ApplicationController
 
   def update
     if current_user.update(user_params)
-      render json: current_user, status: :ok
+      # render json: current_user, status: :ok
+      render json: current_user.display_name, status: :ok
     else
       render json: current_user.errors.full_messages, status: :internal_server_error
     end
@@ -38,7 +39,7 @@ class Api::V1::UsersController < Api::ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:display_name)
+      params.require(:user).permit(:display_name, :introduction)
     end
 
     def token_from_request_headers

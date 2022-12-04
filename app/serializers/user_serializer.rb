@@ -5,6 +5,7 @@ class UserSerializer < ActiveModel::Serializer
     display_name
     email
     photo_url
+    introduction
     created_at
     updated_at
     followings
