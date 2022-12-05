@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @user.display_name %>!</h1>
+    <p>
+      Your Email address, <%= @user.email %> was subscribed with our service.
+    </p>
+    <p>
+      If you do not recognize this email, please ignore it.
+    </p>
+    <p>Thank you for joining our community. Join <%= link_to 'here', ENV['ANIMEDIA_URL'] %>.</p>
+    <p>Animedia, Inc.</p>
+  </body>
+</html>

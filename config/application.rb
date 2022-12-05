@@ -42,7 +42,7 @@ module Anilabo
         origins "*"
         resource "*",
           headers: :any,
-          methods: [:get, :post, :options, :head, :delete]
+          methods: [:get, :post, :put, :patch, :options, :head, :delete]
       end
     end
 
