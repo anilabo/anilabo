@@ -8,7 +8,6 @@ class Api::V1::TimelinesController < Api::ApplicationController
     notifications = Notification
                     .includes(%i[watch_log anime operative_user passive_user])
                     .where(operative_user_id: array)
-                    .order(created_at: :desc)
                     .page(params[:page])
                     .per(10)
 

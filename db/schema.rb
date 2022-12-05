@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_142231) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_05_222443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_142231) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["anime_id"], name: "index_notifications_on_anime_id"
+    t.index ["created_at"], name: "index_notifications_on_created_at"
     t.index ["operative_user_id"], name: "index_notifications_on_operative_user_id"
     t.index ["passive_user_id"], name: "index_notifications_on_passive_user_id"
     t.index ["watch_log_id"], name: "index_notifications_on_watch_log_id"
