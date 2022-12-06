@@ -15,7 +15,9 @@ Rails.application.routes.draw do
         resource :watch_logs, only: %i[create destroy]
       end
       resources :companies, param: :public_uid, only: %i[index show]
-      resources :users, param: :uid, only: %i[show create update destroy]
+      resources :users, param: :uid, only: %i[show create update destroy] do
+        get '/simple', to: "user_simple_info#show"
+      end
       resource :relationships, only: %i[create destroy]
       resource :timelines, only: %i[show]
     end
